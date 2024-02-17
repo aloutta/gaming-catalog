@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.micronaut.aot)
     alias(libs.plugins.micronaut.openapi)
     alias(libs.plugins.micronaut.test.resources)
+    alias(libs.plugins.spotless)
 }
 
 group = 'com.github.aloutta.publishers'
@@ -69,5 +70,11 @@ micronaut {
             useReactive = false
             useAuth = true
         }
+    }
+}
+
+spotless {
+    java {
+        googleJavaFormat()
     }
 }
