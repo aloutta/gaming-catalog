@@ -1,0 +1,12 @@
+[versions]
+micronaut = "4.3.2"
+
+[libraries]
+
+[bundles]
+
+[plugins]
+micronaut-application = { id = "io.micronaut.application", version.ref = "micronaut" }
+micronaut-aot = { id = "io.micronaut.aot", version.ref = "micronaut" }
+micronaut-openapi = { id = "io.micronaut.openapi", version.ref = "micronaut" }
+micronaut-test-resources = { id = "io.micronaut.test-resources", version.ref = "micronaut" }
