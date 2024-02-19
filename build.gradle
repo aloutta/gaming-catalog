@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.spotless)
 }
 
-group = 'com.github.aloutta.publishers'
+group = 'com.github.aloutta.gaming.catalog'
 version = '0.0.1'
 
 repositories {
@@ -38,7 +38,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("com.github.aloutta.publishers.Application")
+    mainClass.set("com.github.aloutta.gaming.catalog.Application")
 }
 
 java {
@@ -66,8 +66,8 @@ micronaut {
     }
     openapi {
         server(file("openapi.yaml")) {
-            apiPackageName = "com.github.aloutta.publishers.api"
-            modelPackageName = "com.github.aloutta.publishers.model"
+            apiPackageName = "com.github.aloutta.gaming.catalog.api"
+            modelPackageName = "com.github.aloutta.gaming.catalog.model"
             useReactive = false
             useAuth = true
         }

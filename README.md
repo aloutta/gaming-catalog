@@ -1,1 +1,1 @@
-# Game Publisher Catalog
+# Gaming Catalog

@@ -1,4 +1,4 @@
-package com.github.aloutta.publishers;
+package com.github.aloutta.gaming.catalog;
 
 import io.micronaut.runtime.*;
 
