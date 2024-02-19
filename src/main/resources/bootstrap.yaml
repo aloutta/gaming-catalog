@@ -1,0 +1,9 @@
+micronaut:
+  application:
+    name: gaming-catalog
+  config-client:
+    enabled: true
+vault:
+  client:
+    config:
+      enabled: true

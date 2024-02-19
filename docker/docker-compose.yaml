@@ -1,0 +1,43 @@
+services:
+  # backend
+  mdb:
+    image: postgres:16.2
+    container_name: master-database
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    env_file:
+      - env_files/postgres.env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 60s
+      retries: 5
+      start_period: 20s
+      timeout: 10s
+  vault:
+    image: vault:1.13.3
+    container_name: vault
+    ports:
+      - 8200:8200
+    env_file:
+      - env_files/vault.env
+    cap_add:
+      - IPC_LOCK
+    command: server -dev -dev-root-token-id="00000000-0000-0000-0000-000000000000"
+    volumes:
+      - vault:/data
+  # services
+  gaming-catalog:
+    image: gaming-catalog:latest
+    container_name: gaming-catalog
+    depends_on:
+      - vault
+      - mdb
+    ports:
+      - 8080:8080
+    env_file:
+      - env_files/gaming-catalog.env
+volumes:
+  postgres:
+  vault:
