@@ -79,4 +79,8 @@ spotless {
         targetExclude("build/**/generated/**/*.*")
         googleJavaFormat()
     }
+    sql {
+        target("src/main/resources/**/*.sql")
+        dbeaver()
+    }
 }
