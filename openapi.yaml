@@ -1,12 +1,155 @@
-openapi: "3.0.2"
+openapi: 3.1.0
 info:
-  title: Gaming Publisher Catalog API
-  version: "0.0.1"
-servers:
-  - url: https://api.server.test/v1
+  title: Gaming Catalog API
+  description: Managing the gaming catalog
+  version: 0.0.1
 paths:
-  /test:
+  /publishers:
     get:
+      description: Returns a (filtered, limited, sorted) list of publishers
+      parameters:
+        - name: name
+          in: query
+          description: Filter by name of publisher
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Limit result set
+          schema:
+            type: integer
+        - name: sortProperty
+          in: query
+          description: Sort by publisher property
+          schema:
+            type: string
+            enum: [id, name]
+            default: id
+        - name: sortOrder
+          in: query
+          description: Sort order
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: asc
       responses:
         '200':
-          description: OK
+          description: Search result
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: #/components/schemas/Publisher
+        default:
+          $ref: "#/components/responses/InternalServerError"
+    post:
+      summary: Create a new publisher
+      operationId: createPublisher
+      requestBody:
+        description: Publisher to add to the system
+        content:
+          application/json:
+            schema:
+              $ref: #/components/schemas/Publisher
+            examples:
+              publisher:
+                id: 1
+        required: true
+      responses:
+        '201':
+          description: Publisher added to the system
+          header:
+            Location:
+              schema:
+                type: string
+                format: url
+                example: #/paths/publishers/1
+        default:
+          $ref: "#/components/responses/InternalServerError"
+  /publishers/{id}:
+    get:
+      description: Returns a publisher
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: The publisher
+          content:
+            application/json:
+              schema:
+                $ref: #/components/schemas/Publisher
+        '404':
+          description: Publisher not found
+        default:
+          $ref: "#/components/responses/InternalServerError"
+    patch:
+      description: Update a publisher
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: #/components/schemas/Publisher
+      responses:
+        '204':
+          description: Publisher successfully updated
+        default:
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      description: Delete a publisher
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Publisher successfully updated
+        default:
+          $ref: "#/components/responses/InternalServerError"
+components:
+  responses:
+    InternalServerError:
+      description: internal
+      content:
+        application/json:
+          schema:
+            $ref: #/components/schemas/Error
+  schemas:
+    Publisher:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        communities:
+          schema:
+            type: array
+            items:
+              type: integer
+              format: int64
+      required:
+        - name
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
