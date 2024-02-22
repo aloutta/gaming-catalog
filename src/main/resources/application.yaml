@@ -6,6 +6,7 @@ datasources:
     driverClassName: org.postgresql.Driver
 jpa:
   default:
+    reactive: true
     packages-to-scan:
       - com.github.aloutta.gaming.catalog
     properties:

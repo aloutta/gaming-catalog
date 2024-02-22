@@ -14,27 +14,26 @@ repositories {
 }
 
 dependencies {
-    annotationProcessor("io.micronaut.data:micronaut-data-processor")
-    annotationProcessor("io.micronaut:micronaut-http-validation")
-    annotationProcessor("io.micronaut.security:micronaut-security-annotations")
-    annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
-    annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
-    implementation("io.micrometer:context-propagation")
-    implementation("io.micronaut.data:micronaut-data-jdbc")
-    implementation("io.micronaut.flyway:micronaut-flyway")
-    implementation("io.micronaut.reactor:micronaut-reactor")
-    implementation("io.micronaut.security:micronaut-security")
-    implementation("io.micronaut.serde:micronaut-serde-jackson")
-    implementation("io.micronaut.sql:micronaut-jdbc-hikari")
-    implementation("io.micronaut.validation:micronaut-validation")
-    implementation("io.swagger.core.v3:swagger-annotations")
-    implementation("jakarta.validation:jakarta.validation-api")
-    compileOnly("io.micronaut:micronaut-http-client")
-    runtimeOnly("ch.qos.logback:logback-classic")
-    runtimeOnly("org.flywaydb:flyway-database-postgresql")
-    runtimeOnly("org.postgresql:postgresql")
-    runtimeOnly("org.yaml:snakeyaml")
-    testImplementation("io.micronaut:micronaut-http-client")
+    annotationProcessor(mn.micronaut.data.processor)
+    annotationProcessor(mn.micronaut.http.validation)
+    annotationProcessor(mn.micronaut.security.annotations)
+    annotationProcessor(mn.micronaut.serde.processor)
+    annotationProcessor(mn.micronaut.validation.processor)
+    implementation(mn.micrometer.context.propagation)
+    implementation(mn.micronaut.flyway)
+    implementation(mn.micronaut.reactor)
+    implementation(mn.micronaut.security)
+    implementation(mn.micronaut.serde.jackson)
+    implementation(mn.micronaut.validation)
+    implementation(mn.swagger.annotations)
+    implementation(mn.micronaut.data.hibernate.reactive)
+    implementation(mn.vertx.pg.client)
+    compileOnly(mn.micronaut.http.client)
+    runtimeOnly(mn.logback.classic)
+    runtimeOnly(mn.flyway.postgresql)
+    runtimeOnly(mn.postgresql)
+    runtimeOnly(mn.snakeyaml)
+    testImplementation(mn.micronaut.http.client)
 }
 
 application {
@@ -53,6 +52,9 @@ micronaut {
         incremental(true)
         annotations("example.micronaut.*")
     }
+    testResources {
+        additionalModules.add("hibernate-reactive-postgresql")
+    }
     aot {
         // Please review carefully the optimizations enabled below
         // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
@@ -68,7 +70,7 @@ micronaut {
         server(file("openapi.yaml")) {
             apiPackageName = "com.github.aloutta.gaming.catalog.api"
             modelPackageName = "com.github.aloutta.gaming.catalog.model"
-            useReactive = false
+            useReactive = true
             useAuth = true
         }
     }
@@ -82,5 +84,11 @@ spotless {
     sql {
         target("src/main/resources/**/*.sql")
         dbeaver()
+    }
+}
+
+tasks {
+    dockerfileNative {
+        jdkVersion.set("21")
     }
 }
