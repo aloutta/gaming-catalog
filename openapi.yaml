@@ -1,4 +1,6 @@
 openapi: 3.1.0
+tags:
+  - name: Publisher
 info:
   title: Gaming Catalog API
   description: Managing the gaming catalog
@@ -6,6 +8,8 @@ info:
 paths:
   /publishers:
     get:
+      tags:
+        - Publisher
       description: Returns a (filtered, limited, sorted) list of publishers
       parameters:
         - name: name
@@ -44,6 +48,8 @@ paths:
         default:
           $ref: "#/components/responses/InternalServerError"
     post:
+      tags:
+        - Publisher
       summary: Create a new publisher
       operationId: createPublisher
       requestBody:
@@ -69,6 +75,8 @@ paths:
           $ref: "#/components/responses/InternalServerError"
   /publishers/{id}:
     get:
+      tags:
+        - Publisher
       description: Returns a publisher
       parameters:
         - name: id
@@ -88,6 +96,8 @@ paths:
         default:
           $ref: "#/components/responses/InternalServerError"
     patch:
+      tags:
+        - Publisher
       description: Update a publisher
       parameters:
         - name: id
@@ -106,6 +116,8 @@ paths:
         default:
           $ref: "#/components/responses/InternalServerError"
     delete:
+      tags:
+        - Publisher
       description: Delete a publisher
       parameters:
         - name: id

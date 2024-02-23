@@ -12,7 +12,7 @@ import java.util.*;
 import reactor.core.publisher.*;
 
 @Controller
-public class PublisherController implements DefaultApi {
+public class PublisherController implements PublisherApi {
 
   private final PublisherRepository publisherRepository;
 
