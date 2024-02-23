@@ -1,17 +1,22 @@
-package com.github.aloutta.gaming.catalog;
+package com.github.aloutta.gaming.catalog.controller;
 
 import com.github.aloutta.gaming.catalog.api.*;
+import com.github.aloutta.gaming.catalog.data.*;
+import com.github.aloutta.gaming.catalog.mapping.*;
 import com.github.aloutta.gaming.catalog.model.*;
+import com.github.aloutta.gaming.catalog.model.Publisher;
+import io.micronaut.http.annotation.*;
 import jakarta.validation.*;
 import jakarta.validation.constraints.*;
 import java.util.*;
 import reactor.core.publisher.*;
 
-public class Controller implements DefaultApi {
+@Controller
+public class PublisherController implements DefaultApi {
 
   private final PublisherRepository publisherRepository;
 
-  public Controller(PublisherRepository publisherRepository) {
+  public PublisherController(PublisherRepository publisherRepository) {
     this.publisherRepository = publisherRepository;
   }
 
@@ -36,7 +41,7 @@ public class Controller implements DefaultApi {
 
   @Override
   public Mono<@Valid Publisher> publishersIdGet(Long id) {
-    return null;
+    return publisherRepository.findById(id).map(PublisherMapper::map);
   }
 
   @Override

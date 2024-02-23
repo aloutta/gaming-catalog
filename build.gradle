@@ -52,9 +52,6 @@ micronaut {
         incremental(true)
         annotations("example.micronaut.*")
     }
-    testResources {
-        additionalModules.add("hibernate-reactive-postgresql")
-    }
     aot {
         // Please review carefully the optimizations enabled below
         // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
@@ -70,6 +67,7 @@ micronaut {
         server(file("openapi.yaml")) {
             apiPackageName = "com.github.aloutta.gaming.catalog.api"
             modelPackageName = "com.github.aloutta.gaming.catalog.model"
+            invokerPackageName = "com.github.aloutta.gaming.catalog.invoker"
             useReactive = true
             useAuth = true
         }
