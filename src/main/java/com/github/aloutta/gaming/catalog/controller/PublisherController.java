@@ -21,16 +21,16 @@ public class PublisherController implements PublisherApi {
   }
 
   @Override
-  public Mono<Void> createPublisher(Publisher publisher) {
-    return null;
+  public Mono<@Valid Publisher> createPublisher(Publisher publisher) {
+    return publisherRepository.save(PublisherMapper.map(publisher)).map(PublisherMapper::map);
   }
 
   @Override
   public Mono<@NotNull List<@Valid Publisher>> publishersGet(
       String name,
+      PlatformsGetSortPropertyParameter sortProperty,
       Integer limit,
-      PublishersGetSortPropertyParameter sortProperty,
-      PublishersGetSortOrderParameter sortOrder) {
+      SortOrder sortOrder) {
     return null;
   }
 

@@ -1,0 +1,1 @@
+insert into publisher(id, name) values(1,"pub1");

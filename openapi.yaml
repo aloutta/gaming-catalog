@@ -1,11 +1,510 @@
 openapi: 3.1.0
 tags:
+  - name: Community
+  - name: Developer
+  - name: DRM
+  - name: Game
+  - name: Platform
   - name: Publisher
 info:
   title: Gaming Catalog API
   description: Managing the gaming catalog
-  version: 0.0.1
+  version: 0.1.0
 paths:
+  /communities:
+    get:
+      tags:
+        - Community
+      responses:
+        '200':
+          description: Returns a (filtered, limited, sorted) list of communities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Community"
+        default:
+          $ref: "#/components/responses/InternalServerError"
+    post:
+      tags:
+        - Community
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Community"
+            examples:
+              developer:
+                id: 1
+        required: true
+      responses:
+        '201':
+          description: Community added to the system
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Community"
+        '400':
+          $ref: "#/components/responses/BadRequest"
+        default:
+          $ref: "#/components/responses/InternalServerError"
+  /communities/{id}:
+    get:
+      tags:
+        - Community
+      description: Returns a community
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: The community
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Community"
+        '404':
+          description: Community not found
+        default:
+          $ref: "#/components/responses/InternalServerError"
+    patch:
+      tags:
+        - Community
+      description: Update a community
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Community"
+      responses:
+        '204':
+          description: Community successfully updated
+        default:
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - Community
+      description: Delete a community
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Community successfully updated
+        default:
+          $ref: "#/components/responses/InternalServerError"
+  /developers:
+    get:
+      tags:
+        - Developer
+      responses:
+        '200':
+          description: Returns a (filtered, limited, sorted) list of developers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Developer"
+        default:
+          $ref: "#/components/responses/InternalServerError"
+    post:
+      tags:
+        - Developer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Developer"
+            examples:
+              developer:
+                id: 1
+        required: true
+      responses:
+        '201':
+          description: Developer added to the system
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Developer"
+        '400':
+          $ref: "#/components/responses/BadRequest"
+        default:
+          $ref: "#/components/responses/InternalServerError"
+  /developers/{id}:
+    get:
+      tags:
+        - Developer
+      description: Returns a developer
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: The developer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Developer"
+        '404':
+          description: Developer not found
+        default:
+          $ref: "#/components/responses/InternalServerError"
+    patch:
+      tags:
+        - Developer
+      description: Update a developer
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Developer"
+      responses:
+        '204':
+          description: Developer successfully updated
+        default:
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - Developer
+      description: Delete a developer
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Developer successfully updated
+        default:
+          $ref: "#/components/responses/InternalServerError"
+  /drms:
+    get:
+      tags:
+        - DRM
+      responses:
+        '200':
+          description: Returns a (filtered, limited, sorted) list of DRMs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DRM"
+        default:
+          $ref: "#/components/responses/InternalServerError"
+    post:
+      tags:
+        - DRM
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DRM"
+            examples:
+              drm:
+                id: 1
+        required: true
+      responses:
+        '201':
+          description: DRM added to the system
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DRM"
+        '400':
+          $ref: "#/components/responses/BadRequest"
+        default:
+          $ref: "#/components/responses/InternalServerError"
+  /drms/{id}:
+    get:
+      tags:
+        - DRM
+      description: Returns a DRM
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: The DRM
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DRM"
+        '404':
+          description: Game not found
+        default:
+          $ref: "#/components/responses/InternalServerError"
+    patch:
+      tags:
+        - DRM
+      description: Update a DRM
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DRM"
+      responses:
+        '204':
+          description: DRM successfully updated
+        default:
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - DRM
+      description: Delete a DRM
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Game successfully updated
+        default:
+          $ref: "#/components/responses/InternalServerError"
+  /games:
+    get:
+      tags:
+        - Game
+      responses:
+        '200':
+          description: Returns a (filtered, limited, sorted) list of games
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Game"
+        default:
+          $ref: "#/components/responses/InternalServerError"
+    post:
+      tags:
+        - Game
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Game"
+            examples:
+              game:
+                id: 1
+        required: true
+      responses:
+        '201':
+          description: Game added to the system
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Game"
+        '400':
+          $ref: "#/components/responses/BadRequest"
+        default:
+          $ref: "#/components/responses/InternalServerError"
+  /games/{id}:
+    get:
+      tags:
+        - Game
+      description: Returns a game
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: The game
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Game"
+        '404':
+          description: Game not found
+        default:
+          $ref: "#/components/responses/InternalServerError"
+    patch:
+      tags:
+        - Game
+      description: Update a game
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Game"
+      responses:
+        '204':
+          description: Game successfully updated
+        default:
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - Game
+      description: Delete a game
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Game successfully updated
+        default:
+          $ref: "#/components/responses/InternalServerError"
+  /platforms:
+    get:
+      tags:
+        - Platform
+      description: Returns a (filtered, limited, sorted) list of platforms
+      parameters:
+        - name: name
+          in: query
+          description: Filter by name of platform
+          schema:
+            type: string
+        - name: sortProperty
+          in: query
+          description: Sort by platforms property
+          schema:
+            type: string
+            enum: [ id, name ]
+            default: id
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/sortOrder"
+      responses:
+        '200':
+          description: Search result
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Platform"
+        default:
+          $ref: "#/components/responses/InternalServerError"
+    post:
+      tags:
+        - Platform
+      summary: Create a new platform
+      operationId: createPlatform
+      requestBody:
+        description: Platform to add to the system
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Platform"
+            examples:
+              platform:
+                id: 1
+        required: true
+      responses:
+        '201':
+          description: Platform added to the system
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Platform"
+        '400':
+          $ref: "#/components/responses/BadRequest"
+        default:
+          $ref: "#/components/responses/InternalServerError"
+  /platforms/{id}:
+    get:
+      tags:
+        - Platform
+      description: Returns a platform
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: The platform
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Platform"
+        '404':
+          description: Publisher not found
+        default:
+          $ref: "#/components/responses/InternalServerError"
+    patch:
+      tags:
+        - Platform
+      description: Update a platform
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Platform"
+      responses:
+        '204':
+          description: Platform successfully updated
+        default:
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - Platform
+      description: Delete a platform
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Platform successfully updated
+        default:
+          $ref: "#/components/responses/InternalServerError"
   /publishers:
     get:
       tags:
@@ -17,11 +516,6 @@ paths:
           description: Filter by name of publisher
           schema:
             type: string
-        - name: limit
-          in: query
-          description: Limit result set
-          schema:
-            type: integer
         - name: sortProperty
           in: query
           description: Sort by publisher property
@@ -29,13 +523,8 @@ paths:
             type: string
             enum: [id, name]
             default: id
-        - name: sortOrder
-          in: query
-          description: Sort order
-          schema:
-            type: string
-            enum: [asc, desc]
-            default: asc
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/sortOrder"
       responses:
         '200':
           description: Search result
@@ -65,12 +554,12 @@ paths:
       responses:
         '201':
           description: Publisher added to the system
-          header:
-            Location:
+          content:
+            application/json:
               schema:
-                type: string
-                format: url
-                example: "#/paths/publishers/1"
+                $ref: "#/components/schemas/Publisher"
+        '400':
+          $ref: "#/components/responses/BadRequest"
         default:
           $ref: "#/components/responses/InternalServerError"
   /publishers/{id}:
@@ -131,7 +620,26 @@ paths:
         default:
           $ref: "#/components/responses/InternalServerError"
 components:
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Limit result set
+      schema:
+        type: integer
+    sortOrder:
+      name: sortOrder
+      in: query
+      description: Sort order
+      schema:
+        $ref: "#/components/schemas/SortOrder"
   responses:
+    BadRequest:
+      description: bad request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
     InternalServerError:
       description: internal
       content:
@@ -139,6 +647,80 @@ components:
           schema:
             $ref: "#/components/schemas/Error"
   schemas:
+    Community:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      required:
+        - name
+    Developer:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        communities:
+          schema:
+            type: array
+            items:
+              type: integer
+              format: int64
+      required:
+        - name
+    DRM:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        communities:
+          schema:
+            type: array
+            items:
+              type: integer
+              format: int64
+      required:
+        - name
+    Game:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        communities:
+          schema:
+            type: array
+            items:
+              type: integer
+              format: int64
+      required:
+        - name
+    Platform:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        communities:
+          schema:
+            type: array
+            items:
+              type: integer
+              format: int64
+      required:
+        - name
     Publisher:
       type: object
       properties:
@@ -165,3 +747,7 @@ components:
       required:
         - code
         - message
+    SortOrder:
+      type: string
+      enum: [ asc, desc ]
+      default: asc
