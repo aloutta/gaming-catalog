@@ -11,101 +11,6 @@ info:
   description: Managing the gaming catalog
   version: 0.1.0
 paths:
-  /communities:
-    get:
-      tags:
-        - Community
-      responses:
-        '200':
-          description: Returns a (filtered, limited, sorted) list of communities
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Community"
-        default:
-          $ref: "#/components/responses/InternalServerError"
-    post:
-      tags:
-        - Community
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Community"
-            examples:
-              developer:
-                id: 1
-        required: true
-      responses:
-        '201':
-          description: Community added to the system
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Community"
-        '400':
-          $ref: "#/components/responses/BadRequest"
-        default:
-          $ref: "#/components/responses/InternalServerError"
-  /communities/{id}:
-    get:
-      tags:
-        - Community
-      description: Returns a community
-      parameters:
-        - name: id
-          in: path
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '200':
-          description: The community
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Community"
-        '404':
-          description: Community not found
-        default:
-          $ref: "#/components/responses/InternalServerError"
-    patch:
-      tags:
-        - Community
-      description: Update a community
-      parameters:
-        - name: id
-          in: path
-          schema:
-            type: integer
-            format: int64
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Community"
-      responses:
-        '204':
-          description: Community successfully updated
-        default:
-          $ref: "#/components/responses/InternalServerError"
-    delete:
-      tags:
-        - Community
-      description: Delete a community
-      parameters:
-        - name: id
-          in: path
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '204':
-          description: Community successfully updated
-        default:
-          $ref: "#/components/responses/InternalServerError"
   /developers:
     get:
       tags:
@@ -134,7 +39,7 @@ paths:
                 id: 1
         required: true
       responses:
-        '201':
+        '200':
           description: Developer added to the system
           content:
             application/json:
@@ -197,7 +102,7 @@ paths:
             type: integer
             format: int64
       responses:
-        '204':
+        '200':
           description: Developer successfully updated
         default:
           $ref: "#/components/responses/InternalServerError"
@@ -229,7 +134,7 @@ paths:
                 id: 1
         required: true
       responses:
-        '201':
+        '200':
           description: DRM added to the system
           content:
             application/json:
@@ -292,7 +197,7 @@ paths:
             type: integer
             format: int64
       responses:
-        '204':
+        '200':
           description: Game successfully updated
         default:
           $ref: "#/components/responses/InternalServerError"
@@ -324,7 +229,7 @@ paths:
                 id: 1
         required: true
       responses:
-        '201':
+        '200':
           description: Game added to the system
           content:
             application/json:
@@ -387,7 +292,7 @@ paths:
             type: integer
             format: int64
       responses:
-        '204':
+        '200':
           description: Game successfully updated
         default:
           $ref: "#/components/responses/InternalServerError"
@@ -438,7 +343,7 @@ paths:
                 id: 1
         required: true
       responses:
-        '201':
+        '200':
           description: Platform added to the system
           content:
             application/json:
@@ -501,7 +406,7 @@ paths:
             type: integer
             format: int64
       responses:
-        '204':
+        '200':
           description: Platform successfully updated
         default:
           $ref: "#/components/responses/InternalServerError"
@@ -552,7 +457,7 @@ paths:
                 id: 1
         required: true
       responses:
-        '201':
+        '200':
           description: Publisher added to the system
           content:
             application/json:
@@ -615,7 +520,7 @@ paths:
             type: integer
             format: int64
       responses:
-        '204':
+        '200':
           description: Publisher successfully updated
         default:
           $ref: "#/components/responses/InternalServerError"
@@ -647,16 +552,6 @@ components:
           schema:
             $ref: "#/components/schemas/Error"
   schemas:
-    Community:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      required:
-        - name
     Developer:
       type: object
       properties:

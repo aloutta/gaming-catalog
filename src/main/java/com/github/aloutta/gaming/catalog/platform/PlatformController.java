@@ -1,8 +1,6 @@
-package com.github.aloutta.gaming.catalog.controller;
+package com.github.aloutta.gaming.catalog.platform;
 
 import com.github.aloutta.gaming.catalog.api.*;
-import com.github.aloutta.gaming.catalog.data.*;
-import com.github.aloutta.gaming.catalog.mapping.*;
 import com.github.aloutta.gaming.catalog.model.*;
 import com.github.aloutta.gaming.catalog.model.Platform;
 import io.micronaut.http.annotation.*;

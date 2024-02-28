@@ -1,8 +1,6 @@
-package com.github.aloutta.gaming.catalog.controller;
+package com.github.aloutta.gaming.catalog.publisher;
 
 import com.github.aloutta.gaming.catalog.api.*;
-import com.github.aloutta.gaming.catalog.data.*;
-import com.github.aloutta.gaming.catalog.mapping.*;
 import com.github.aloutta.gaming.catalog.model.*;
 import com.github.aloutta.gaming.catalog.model.Publisher;
 import io.micronaut.http.annotation.*;
@@ -46,6 +44,8 @@ public class PublisherController implements PublisherApi {
 
   @Override
   public Mono<Void> publishersIdPatch(Long id, Publisher publisher) {
-    return null;
+    var entity = PublisherMapper.map(publisher);
+    entity.setId(id);
+    return publisherRepository.update(entity).then();
   }
 }

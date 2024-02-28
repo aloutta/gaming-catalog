@@ -1,20 +1,11 @@
-datasources:
-  default:
-    dialect: POSTGRES
-    driver-class-name: org.postgresql.Driver
+datasources.default.dialect: POSTGRES
+flyway.datasources.default.enabled: true
 jpa:
   default:
     reactive: true
-    packages-to-scan:
-      - com.github.aloutta.gaming.catalog.data
     properties:
       hibernate:
         hbm2ddl:
           auto: update
-        show_sql: true
         connection:
           db-type: postgres
-flyway:
-  datasources:
-    default:
-      enabled: true

@@ -1,8 +1,6 @@
-package com.github.aloutta.gaming.catalog.controller;
+package com.github.aloutta.gaming.catalog.drm;
 
 import com.github.aloutta.gaming.catalog.api.*;
-import com.github.aloutta.gaming.catalog.data.*;
-import com.github.aloutta.gaming.catalog.mapping.*;
 import com.github.aloutta.gaming.catalog.model.DRM;
 import io.micronaut.http.annotation.*;
 import jakarta.validation.*;
