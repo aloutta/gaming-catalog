@@ -14,6 +14,7 @@ repositories {
 }
 
 dependencies {
+    annotationProcessor(libs.lombok)
     annotationProcessor(mn.micronaut.data.processor)
     annotationProcessor(mn.micronaut.http.validation)
     annotationProcessor(mn.micronaut.security.annotations)
@@ -28,6 +29,7 @@ dependencies {
     implementation(mn.swagger.annotations)
     implementation(mn.micronaut.data.hibernate.reactive)
     implementation(mn.vertx.pg.client)
+    compileOnly(libs.lombok)
     compileOnly(mn.micronaut.http.client)
     runtimeOnly(mn.logback.classic)
     runtimeOnly(mn.flyway.postgresql)
@@ -73,6 +75,7 @@ micronaut {
             invokerPackageName = "com.github.aloutta.gaming.catalog.invoker"
             useReactive = true
             useAuth = true
+            lombok = true
         }
     }
 }
