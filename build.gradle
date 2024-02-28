@@ -36,6 +36,7 @@ dependencies {
     runtimeOnly(mn.postgresql)
     runtimeOnly(mn.snakeyaml)
     testImplementation(mn.micronaut.http.client)
+    testImplementation(mn.micronaut.test.rest.assured)
 }
 
 application {
