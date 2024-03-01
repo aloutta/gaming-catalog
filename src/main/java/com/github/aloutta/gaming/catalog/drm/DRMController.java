@@ -33,12 +33,14 @@ public class DRMController implements DrmApi {
   }
 
   @Override
-  public Mono<Void> drmsIdPatch(Long id, DRM game) {
-    return null;
+  public Mono<Void> drmsIdPatch(Long id, DRM drm) {
+    var entity = DRMMapper.map(drm);
+    entity.setId(id);
+    return drmRepository.update(entity).then();
   }
 
   @Override
-  public Mono<@Valid DRM> drmsPost(DRM game) {
-    return drmRepository.save(DRMMapper.map(game)).map(DRMMapper::map);
+  public Mono<@Valid DRM> drmsPost(DRM drm) {
+    return drmRepository.save(DRMMapper.map(drm)).map(DRMMapper::map);
   }
 }

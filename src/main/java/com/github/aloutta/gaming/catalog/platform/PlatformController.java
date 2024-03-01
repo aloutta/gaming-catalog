@@ -44,6 +44,8 @@ public class PlatformController implements PlatformApi {
 
   @Override
   public Mono<Void> platformsIdPatch(Long id, Platform platform) {
-    return null;
+    var entity = PlatformMapper.map(platform);
+    entity.setId(id);
+    return platformRepository.update(entity).then();
   }
 }

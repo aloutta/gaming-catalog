@@ -34,7 +34,9 @@ public class GameController implements GameApi {
 
   @Override
   public Mono<Void> gamesIdPatch(Long id, Game game) {
-    return null;
+    var entity = GameMapper.map(game);
+    entity.setId(id);
+    return gameRepository.update(entity).then();
   }
 
   @Override

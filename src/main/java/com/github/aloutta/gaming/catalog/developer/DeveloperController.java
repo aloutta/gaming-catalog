@@ -34,7 +34,9 @@ public class DeveloperController implements DeveloperApi {
 
   @Override
   public Mono<Void> developersIdPatch(Long id, Developer developer) {
-    return null;
+    var entity = DeveloperMapper.map(developer);
+    entity.setId(id);
+    return developerRepository.update(entity).then();
   }
 
   @Override
